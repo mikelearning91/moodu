@@ -158,7 +158,6 @@ if (window.location.pathname == '/login.html') {
 };
 
 // if on index page, redirect to profile page if user clicks on login/signup modal buttons
-if (window.location.pathname == '/index.html') {
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
             $('.to-modal').on('click', function(event) {
@@ -167,7 +166,6 @@ if (window.location.pathname == '/index.html') {
             });
         }
     });
-};
 
 // -------------------------Need to add forgot password-------------------------//
 // var auth = firebase.auth();
