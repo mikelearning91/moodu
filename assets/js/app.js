@@ -466,7 +466,7 @@ function processResult(response) {
     }
     if (feelingMeasures[6] == max) {
         placesCategory = "meal_delivery";
-        booksCategory = "motivational"; // setting var category for Google Books API
+        booksCategory = "motivation"; // setting var category for Google Books API
         $('#mapContainer').empty();
         $('#mapDetails').empty();
         initAutocomplete();
@@ -865,6 +865,37 @@ $('#getBooks').on('click', function() {
         }
         bookList.prepend('<h2 class="quote-title">Check These Books Out</h2><hr>')
         bookList.fadeIn();
+        $('#mooduComment').html('Look what I <br>found...');
+        $("#commentContainer").delay(200).animate({ opacity: '1', left: '131px' }, 500);
+        $("#commentContainer").delay(3000).animate({ left: '-200%', opacity: '0' }, 800);
+
+        var adjustedHeight = "0";
+        if ($('#books').parents('.box').height() > adjustedHeight) {
+            adjustedHeight = $('#books').parents('.box').height();
+        }
+        moreHeight = adjustedHeight + 50;
+        $("#appContainer").height(moreHeight).css('margin-bottom', '150px');
+
+    });
+});
+
+// Activity API
+$('#getActivities').on('click', function() {
+$.ajax({
+        url: "http://api.amp.active.com/search?near=Morris%26Plains%2CNJ%2CUS&v=json&radius=50&current_page=1&per_page=10&sort=distance&exclude_children=false&api_key=ff82p44mnsgf8qvvxad33tzv",
+        data: "JSON",
+        global: false,
+        beforeSend: function() {
+            $('#random-quotes').empty();
+            $('#preloader').show();
+            $('#preloadText').html("Finding <span class='hideOn640'>Activities</span>");
+        }
+    }).done(function(result) {
+        $('#preloader').hide();
+        $('#preloadText').html("Analyzing <span class='hideOn640'>Emotions</span>");
+        console.log(result);
+
+
         $('#mooduComment').html('Look what I <br>found...');
         $("#commentContainer").delay(200).animate({ opacity: '1', left: '131px' }, 500);
         $("#commentContainer").delay(3000).animate({ left: '-200%', opacity: '0' }, 800);
